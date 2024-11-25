@@ -148,3 +148,19 @@ def Policy2310790_2313873_2311011_2311770_2310271(Policy):
                     stock["right_bound"] = 0
                     stock["top_bound"] = 0
                     break
+                       
+    # Calculate the probability of transitioning to the next state.
+    def transition_probability(self, current_state_energy, next_state_energy, temperature):
+        if next_state_energy <= current_state_energy:
+            return 1
+        
+        return exp((current_state_energy - next_state_energy) / temperature)
+    
+
+    # Check if the position for placing the item is within the stock's bounds.
+    def is_inside(self, stock_width, stock_height, product_size, position):
+        return product_size[0] + position[0] <= stock_width and product_size[1] + position[1] <= stock_height
+    
+    # Helper function to generate a random integer centered around 0, following a normal distribution.
+    def rand(self, std):
+        return int(random.randn() * std)
